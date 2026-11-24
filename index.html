@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0e18" />
+    <meta
+      name="description"
+      content="J.E.M.I.D. — Jeeshan's Embedded Mind Interface Device."
+    />
+    <title>J.E.M.I.D.</title>
+    <link rel="icon" type="image/png" href="assets/jemid-avatar.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="jen-auth.js" data-chip="off"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <div
+          class="brand-row"
+          id="brandRow"
+          role="button"
+          tabindex="0"
+          aria-expanded="true"
+          aria-label="Collapse sidebar"
+        >
+          <div class="brand-mark">
+            <span class="bm-t">J<span>.</span></span
+            ><em class="burger"><i></i><i></i><i></i></em>
+          </div>
+          <div class="brand-copy">
+            <strong>J.E.M.I.D.</strong><small>PERSONAL AI SYSTEM</small>
+          </div>
+          <button
+            class="icon-btn sidebar-close"
+            id="closeSidebar"
+            aria-label="Close navigation"
+          >
+            ×
+          </button>
+        </div>
+        <button class="new-chat-btn" id="newChatBtn">
+          <span class="plus">＋</span><span class="nl-t"> New chat</span>
+        </button>
+        <button class="project-new-btn" id="newProjectBtn" type="button">
+          <span>▣</span><span class="nl-t"> New project</span>
+        </button>
+        <label class="search-box"
+          ><span>⌕</span
+          ><input
+            id="chatSearch"
+            type="search"
+            placeholder="Search conversations…"
+            autocomplete="off"
+        /><kbd class="search-kbd">Ctrl K</kbd></label>
+        <div class="section-label">
+          YOUR WORKSPACE <span class="live-dot"></span>
+        </div>
+        <div
+          class="history-list"
+          id="historyList"
+          aria-label="Conversation history"
+        ></div>
+        <div class="sidebar-bottom">
+          <div class="mini-status">
+            <span class="status-orb" id="sidebarStatusOrb"></span>
+            <div>
+              <strong id="sidebarStatusText">Not connected</strong
+              ><small>Gemini connection</small>
+            </div>
+            <button class="tiny-link" id="quickApiBtn">Setup</button>
+          </div>
+          <button class="nav-item" id="settingsBtn">
+            <span>⚙</span><span class="nl-t">Settings</span
+            ><span class="nav-chevron">›</span>
+          </button>
+          <div
+            class="profile-row"
+            id="profileRow"
+            role="button"
+            tabindex="0"
+            aria-haspopup="true"
+            aria-label="Your account"
+          >
+            <span class="user-avatar" id="userAvatar"></span>
+            <div>
+              <strong id="userName"></strong><small id="userAddr"></small>
+            </div>
+            <span class="owner-badge" id="ownerBadge" hidden>OWNER</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+      <main class="main-panel">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button
+              class="icon-btn menu-btn"
+              id="openSidebar"
+              aria-label="Open navigation"
+            >
+              ☰
+            </button>
+            <div class="breadcrumb">
+              <span>Workspace</span><span class="crumb-sep">/</span
+              ><strong id="topChatTitle">New conversation</strong>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <div class="connection-pill" id="connectionPill">
+              <span class="status-orb"></span
+              ><span id="connectionLabel">Offline</span>
+            </div>
+            <button class="topbar-model" id="topModelBtn" title="Choose model">
+              <span class="model-spark">✳</span
+              ><span id="topModelLabel">Gemini 3.8 Flash</span
+              ><span class="chevron">⌄</span>
+            </button>
+          </div>
+        </header>
+
+        <section class="chat-scroll" id="chatScroll" aria-live="polite">
+          <div class="welcome" id="welcomeScreen">
+            <div class="welcome-avatar-wrap">
+              <div class="avatar-ring"></div>
+              <img
+                class="welcome-avatar"
+                src="assets/jemid-avatar.png"
+                alt="J.E.M.I.D. official avatar"
+              /><span class="avatar-online"></span>
+            </div>
+            <div class="eyebrow">
+              <span class="eyebrow-line"></span> PERSONAL ADVANCED AI
+              <span class="eyebrow-line"></span>
+            </div>
+            <h1>Hello, <span>Architect.</span></h1>
+            <p class="welcome-lead">
+              I'm J.E.M.I.D. How can I assist you today?
+            </p>
+            <div class="identity-card">
+              <div class="identity-icon">J.</div>
+              <div>
+                <strong>J.E.M.I.D.</strong>
+                <p>JEESHAN'S EMBEDDED MIND INTERFACE DEVICE</p>
+              </div>
+              <span class="verified-mark">✓</span>
+            </div>
+            <div class="prompt-grid">
+              <button
+                class="prompt-card"
+                data-prompt="Help me plan and build a modern responsive website using HTML, CSS and JavaScript."
+              >
+                <span class="prompt-icon blue">⌘</span
+                ><span
+                  ><strong>Build a website</strong
+                  ><small>Plan a polished web experience</small></span
+                ><b>↗</b>
+              </button>
+              <button
+                class="prompt-card"
+                data-prompt="Help me debug my code. Explain the cause and show a corrected version."
+              >
+                <span class="prompt-icon violet">⌕</span
+                ><span
+                  ><strong>Debug my code</strong
+                  ><small>Find issues and fix them</small></span
+                ><b>↗</b>
+              </button>
+              <button
+                class="prompt-card"
+                data-prompt="Teach me a programming concept in simple steps, with examples and a short practice task."
+              >
+                <span class="prompt-icon cyan">{ }</span
+                ><span
+                  ><strong>Explain programming</strong
+                  ><small>Learn one concept at a time</small></span
+                ><b>↗</b>
+              </button>
+              <button
+                class="prompt-card"
+                data-prompt="Help me brainstorm a useful, realistic technology project I can build as a beginner."
+              >
+                <span class="prompt-icon silver">✧</span
+                ><span
+                  ><strong>Brainstorm an idea</strong
+                  ><small>Turn an idea into a plan</small></span
+                ><b>↗</b>
+              </button>
+            </div>
+            <div class="welcome-foot">
+              <span class="tiny-shield">◇</span> Your workspace · Your ideas ·
+              Your command
+            </div>
+          </div>
+          <div class="messages" id="messages"></div>
+        </section>
+
+        <button
+          class="scroll-bottom-btn"
+          id="scrollBottomBtn"
+          hidden
+          aria-label="Scroll to bottom"
+        >
+          ↓
+        </button>
+
+        <div
+          class="voice-mode-panel"
+          id="voiceModePanel"
+          hidden
+          aria-live="polite"
+        >
+          <div class="voice-pulse" id="voicePulse">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="voice-mode-copy">
+            <strong id="voiceModeTitle">Voice mode is ready</strong
+            ><small id="voiceModeStatus"
+              >Speak naturally. J.E.M.I.D. will listen and reply aloud.</small
+            >
+          </div>
+          <button class="voice-mode-mute" id="voiceMuteBtn" type="button" aria-pressed="false" title="Mute mic" aria-label="Mute microphone"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg><span class="mic-slash" aria-hidden="true"></span></button>
+          <button class="voice-mode-end" id="endVoiceModeBtn" type="button">
+            End voice
+          </button>
+        </div>
+        <footer class="composer-area">
+          <div class="composer-wrap">
+            <div class="composer-box">
+              <div class="attach-strip" id="attachStrip" hidden></div>
+              <textarea
+                id="messageInput"
+                rows="1"
+                placeholder="Message J.E.M.I.D.…"
+                aria-label="Message J.E.M.I.D."
+              ></textarea>
+              <div class="composer-bottom">
+                <div class="composer-tools">
+                  <button
+                    class="attach-btn"
+                    id="attachBtn"
+                    type="button"
+                    title="Attach images, files, audio, video or ZIP"
+                    aria-label="Attach files"
+                  >
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 11.5-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l9-9a3.7 3.7 0 0 1 5.2 5.2l-9 9a1.8 1.8 0 0 1-2.6-2.6l8.3-8.3"/></svg>
+                    <span class="attach-count" id="attachCount" hidden></span>
+                  </button>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    multiple
+                    hidden
+                  />
+                  <span class="composer-hint"
+                    >Enter to send · Shift + Enter for new line</span
+                  >
+                  <span class="char-count" id="charCount"></span>
+                </div>
+                <div class="composer-actions">
+                  <button
+                    class="tool-btn"
+                    id="micBtn"
+                    type="button"
+                    title="Dictate message"
+                    aria-label="Start voice input"
+                  >
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg><span class="mic-slash" aria-hidden="true"></span>
+                  </button>
+                  <button
+                    class="voice-mode-btn"
+                    id="voiceModeBtn"
+                    type="button"
+                    title="Start two-way voice conversation"
+                  >
+                    <span class="voice-mode-icon">◉</span><span>Voice</span>
+                  </button>
+                  <button
+                    class="send-btn is-empty"
+                    id="sendBtn"
+                    type="button"
+                    aria-label="Send message"
+                    title="Send"
+                  >
+                    <b>↑</b>
+                  </button>
+                  <button
+                    class="stop-btn"
+                    id="stopBtn"
+                    type="button"
+                    hidden
+                    aria-label="Stop generating"
+                    title="Stop"
+                  >
+                    <b></b>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <p class="disclaimer">
+              J.E.M.I.D. can make mistakes. Verify important information.
+              <span>API keys are used in your browser.</span>
+            </p>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <dialog class="settings-dialog" id="settingsDialog">
+      <div class="dialog-head">
+        <div>
+          <div class="dialog-eyebrow">SYSTEM CONTROL</div>
+          <h2>Settings <span>&amp; configuration</span></h2>
+        </div>
+        <button class="icon-btn" id="closeSettings" aria-label="Close settings">
+          ×
+        </button>
+      </div>
+      <div class="settings-tabs">
+        <button class="settings-tab active" data-tab="apiPanel">
+          API &amp; Model</button
+        ><button class="settings-tab" data-tab="preferencesPanel">
+          Preferences</button
+        ><button class="settings-tab" data-tab="identityPanel">
+          About JEMID
+        </button>
+      </div>
+      <section class="settings-panel active" id="apiPanel">
+        <div class="panel-title">
+          <span class="panel-symbol">✳</span>
+          <div>
+            <h3>Gemini connection</h3>
+            <p>Connect your own Google Gemini API key.</p>
+          </div>
+          <span class="status-tag" id="settingsStatus">DISCONNECTED</span>
+        </div>
+        <a
+          class="field-label api-key-create-link"
+          href="https://aistudio.google.com/app/apikey"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Google Gemini API key ↗</a
+        >
+        <div class="key-field">
+          <input
+            id="apiKeyInput"
+            type="password"
+            placeholder="Paste your API key"
+            autocomplete="off"
+            spellcheck="false"
+          /><button id="toggleKeyBtn" type="button">Show</button>
+        </div>
+        <div class="field-help">
+          Your key is not included in the project source. Saving it stores it in
+          this browser's LocalStorage.
+        </div>
+        <label class="field-label" for="modelSelect">Gemini model</label>
+        <select id="modelSelect" class="select-field">
+          <option value="gemini-3.8-flash">
+            Gemini 3.8 Flash (Recommended)
+          </option>
+          <option value="gemini-3.7-flash">Gemini 3.7 Flash</option>
+          <option value="gemini-3.6-flash">Gemini 3.6 Flash</option>
+          <option value="gemini-3.5-flash">Gemini 3.5 Flash</option>
+          <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite</option>
+          <option value="gemini-3.1-flash-lite">Gemini 3.1 Flash-Lite</option>
+        </select>
+        <div class="api-actions">
+          <button class="secondary-btn" id="disconnectBtn">Disconnect</button
+          ><button class="primary-btn" id="connectBtn">
+            Save &amp; connect <span>→</span>
+          </button>
+        </div>
+        <div class="security-note">
+          <span>⚠</span>
+          <div>
+            <strong>Browser-side key warning</strong>
+            <p>
+              This backend-free prototype sends your key from the browser to
+              Google's API. Anyone with access to this browser or its developer
+              tools may be able to find it. Use a key with appropriate
+              restrictions, monitor usage, and never publish this project with a
+              personal key saved.
+            </p>
+          </div>
+        </div>
+        <p class="api-result" id="apiResult" role="status"></p>
+      </section>
+      <section class="settings-panel" id="preferencesPanel">
+        <div class="panel-title">
+          <span class="panel-symbol">◈</span>
+          <div>
+            <h3>Personal preferences</h3>
+            <p>Make the workspace yours.</p>
+          </div>
+        </div>
+        <label class="field-label" for="themeSelect">Appearance</label
+        ><select id="themeSelect" class="select-field">
+          <option value="dark">Black &amp; white (default)</option>
+          <option value="light">Light mode</option>
+        </select>
+        <label class="field-label" for="languageSelect">Response language</label
+        ><select id="languageSelect" class="select-field">
+          <option value="auto">Automatic (match my language)</option>
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="hinglish">Hinglish</option>
+        </select>
+        <div class="preference-row">
+          <div>
+            <strong>Conversation history</strong
+            ><small>Saved in this browser on this device.</small>
+          </div>
+          <button class="secondary-btn danger-btn" id="clearAllBtn">
+            Clear all chats
+          </button>
+        </div>
+        <p class="field-help">
+          Clearing conversations cannot be undone. It does not remove your API
+          key or preferences.
+        </p>
+      </section>
+      <section class="settings-panel" id="identityPanel">
+        <div class="about-avatar">
+          <img src="assets/jemid-avatar.png" alt="J.E.M.I.D. official avatar" />
+          <div>
+            <div class="dialog-eyebrow">OFFICIAL SYSTEM IDENTITY</div>
+            <h3>J.E.M.I.D.</h3>
+            <p>Personal Advanced AI Assistant</p>
+          </div>
+        </div>
+        <div class="identity-detail">
+          <span>Full form</span
+          ><strong>JEESHAN'S EMBEDDED MIND INTERFACE DEVICE</strong>
+        </div>
+        <div class="identity-detail">
+          <span>Founder &amp; creator</span><strong>Jeeshan Ahmad</strong>
+        </div>
+        <div class="identity-detail">
+          <span>Owner</span><strong>Jeeshan Ahmad</strong>
+        </div>
+        <div class="security-note info-note">
+          <span>i</span>
+          <div>
+            <strong>Prototype information</strong>
+            <p>
+              J.E.M.I.D. uses Google's Gemini API for responses. The identity
+              details are included in every request's system instruction, but an
+              AI model can still occasionally make mistakes.
+            </p>
+          </div>
+        </div>
+      </section>
+      <div class="dialog-foot">
+        <span><span class="tiny-shield">◇</span> J.E.M.I.D. SYSTEM v1.0</span
+        ><button class="secondary-btn" id="doneSettings">Done</button>
+      </div>
+    </dialog>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  </body>
+</html>
